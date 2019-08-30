@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace cmdapi.Controllers
 {
     [Route("api/[controller]")]
-    // [ApiController]
+    [ApiController]
     public class CommandsController : ControllerBase 
     {
         // simple GET:
