@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-// using CommandAPI.Models;
+using cmdapi.Models;
 // using Microsoft.EntityFrameworkCore;
 
 namespace cmdapi.Controllers
@@ -9,11 +9,15 @@ namespace cmdapi.Controllers
     [ApiController]
     public class CommandsController : ControllerBase 
     {
-        // simple GET:
+        private readonly CommandContext _context;
+
+        public CommandsController (CommandContext context) => _context = context;
+ 
+        // GET all results:
         [HttpGet]
-        public ActionResult<IEnumerable<string>> GetString()
+        public ActionResult<IEnumerable<Command>> GetAll()
         {
-            return new string[] {"hard", "coded", "string"};
+            return _context.CommandItems;
         }
     }
 }
