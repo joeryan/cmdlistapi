@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using cmdapi.Models;
-// using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace cmdapi.Controllers
 {
@@ -41,6 +41,20 @@ namespace cmdapi.Controllers
 
             return CreatedAtAction("GetItem", new {Id = newItem.Id}, newItem);
 
+        }
+
+        // PUT api/commands/n
+        [HttpPut("{id}")]
+        public ActionResult<Command> PutItem(int id, [FromBody] Command updatedItem)
+        {
+            if (id != updatedItem.Id)
+            {
+                return BadRequest();
+            }
+            _context.Entry(updatedItem).State = EntityState.Modified;
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }
 }
